@@ -1,0 +1,27 @@
+<main class="container">
+  <%= if not is_nil(live_flash(@flash, :info)) do %>
+  <div class="alert shadow-lg absolute right-1 bottom-1 lg:w-4/12 sm:w-12/12 h-16"
+    phx-click="lv:clear-flash"
+    phx-value-key="info">
+  <div>
+    <i class="text-blue-500" data-feather="info"></i>
+    <span>
+      <%= live_flash(@flash, :info) %>
+    </span>
+  </div>
+</div>
+<% end %>
+<%= if not is_nil(get_flash(@conn, :error)) do %>
+  <div class="alert alert-error shadow-lg absolute right-1 bottom-1 lg:w-4/12 sm:w-12/12 h-16"
+    phx-click="lv:clear-flash"
+    phx-value-key="error">
+  <div>
+    <i data-feather="x-circle"></i>
+    <span>
+      <%= get_flash(@conn, :error) %>
+    </span>
+  </div>
+</div>
+<% end %>
+  <%= @inner_content %>
+</main>

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bulma": "^0.9.3",
+    "feather-icons": "^4.28.0"
+  }
+}
