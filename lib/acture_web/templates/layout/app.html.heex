@@ -1,18 +1,16 @@
-<main class="container">
+<main class="section">
   <%= if not is_nil(get_flash(@conn, :info)) do %>
     <div class="message is-corner">
       <div class="message-body">
-        <i class="has-text-info" data-feather="info"></i>
         <span>
           <%= get_flash(@conn, :info) %>
         </span>
       </div>
     </div>
-  <% end %>
-  <%= if not is_nil(get_flash(@conn, :error)) do %>
-    <div class="alert alert-error shadow-lg absolute right-1 bottom-1 lg:w-4/12 sm:w-12/12 h-16">
-      <div>
-        <i data-feather="x-circle"></i>
+    <% end %>
+    <%= if not is_nil(get_flash(@conn, :error)) do %>
+    <div class="message is-corner">
+      <div class="message-body">
         <span>
           <%= get_flash(@conn, :error) %>
         </span>

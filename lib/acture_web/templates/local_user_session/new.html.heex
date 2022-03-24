@@ -1,4 +1,4 @@
-<section class="section">
+<section class="container">
   <h1 class="has-text-centered title">Welcome, please login</h1>
   <%= if @error_message do %>
     <div class="columns">
@@ -15,8 +15,11 @@
     </div>
   <% end %>
   <.form let={f} for={@conn} action={Routes.local_user_session_path(@conn, :create)} as={:local_user}>
-    <div class="columns">
-      <div class="column is-half-desktop is-offset-one-quarter-desktop">
+    <div class="columns is-vcentered">
+      <div class="column is-desktop">
+        <img src={Routes.static_path(@conn, "/images/login.svg")} style="height: 256px" >
+        </div>
+      <div class="column is-one-third-desktop">
         <div class="field">
           <%= label f, :email, class: "label" %>
           <div class="control">
