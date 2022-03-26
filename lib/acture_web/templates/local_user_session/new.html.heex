@@ -1,47 +1,52 @@
 <section class="container">
-  <h1 class="has-text-centered title">Welcome, please login</h1>
-  <%= if @error_message do %>
-    <div class="columns">
-      <div class="column is-half-desktop is-offset-one-quarter-desktop">
-        <article class="message is-danger">
-          <div class="message-header">
-            <p>We found some errors along the way</p>
-          </div>
-          <div class="message-body">
-            <%= @error_message %>
-          </div>
-        </article>
-      </div>
-    </div>
-  <% end %>
-  <.form let={f} for={@conn} action={Routes.local_user_session_path(@conn, :create)} as={:local_user}>
-    <div class="columns is-vcentered">
-      <div class="column is-desktop">
-        <img src={Routes.static_path(@conn, "/images/login.svg")} style="height: 256px" >
-        </div>
-      <div class="column is-one-third-desktop">
-        <div class="field">
-          <%= label f, :email, class: "label" %>
-          <div class="control">
-            <%= email_input f, :email, required: true, class: "input" %>
-          </div>
-        </div>
-        <div class="field">
-          <%= label f, :password, class: "label" %>
-          <div class="control">
-            <%= password_input f, :password, required: true, class: "input" %>
-          </div>
-        </div>
-        <div class="field">
-          <%= label f, :remember_me, class: "checkbox" do %>
-            <%= checkbox f, :remember_me %>
-            Keep me logged in for 60 days
-          <% end %>
-        </div>
-        <div>
-          <%= submit "Log in", class: "button is-primary" %>
-        </div>
-      </div>
-    </div>
-  </.form>
+	<div class="columns mt-5">
+		<div class="column is-half-desktop is-offset-one-third-desktop">
+			<h1 class="has-text-centered title is-1">Welcome, please login</h1>
+			<%= if @error_message do %>
+			<div class="columns">
+				<div class="column">
+					<article class="message is-danger">
+						<div class="message-header">
+							<p>We found some errors along the way</p>
+						</div>
+						<div class="message-body">
+							<%= @error_message %>
+						</div>
+					</article>
+				</div>
+			</div>
+			<% end %>
+			<.form let={f} for={@conn} action={Routes.local_user_session_path(@conn, :create)} as={:local_user}>
+
+				<div class="columns is-vcentered">
+					<div class="column is-desktop">
+						<img src={Routes.static_path(@conn, "/images/login.svg" )} style="height: 256px">
+					</div>
+					<div class="column ">
+						<div class="field">
+							<%= label f, :email, class: "label" %>
+							<div class="control">
+								<%= email_input f, :email, required: true, class: "input" %>
+							</div>
+						</div>
+						<div class="field">
+							<%= label f, :password, class: "label" %>
+							<div class="control">
+								<%= password_input f, :password, required: true, class: "input" %>
+							</div>
+						</div>
+						<div class="field">
+							<%= label f, :remember_me, class: "checkbox" do %>
+							<%= checkbox f, :remember_me %>
+							Keep me logged in for 60 days
+							<% end %>
+						</div>
+						<div>
+							<%= submit "Log in", class: "button is-primary" %>
+						</div>
+					</div>
+				</div>
+			</.form>
+		</div>
+	</div>
 </section>

@@ -1,0 +1,71 @@
+<div class="section">
+  <h2 class="subtitle is-3"><%= @title %></h2>
+
+  <.form let={f} for={@changeset} id="project-form" phx-target={@myself} phx-change="validate" phx-submit="save">
+    <div class="columns">
+      <div class="column">
+        <div class="field">
+          <%= label f, :title , class: "label" %>
+          <div class="control">
+            <%= text_input f, :title, class: "input" %>
+            <%= error_tag f, :title %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <div class="field">
+          <%= label f, :description , class: "label" %>
+          <div class="control">
+            <%= textarea f, :description, class: "input", style: "height: 120px" %>
+            <%= error_tag f, :description %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <div class="field">
+          <%= label f, :customer , class: "label" %>
+          <div class="control">
+            <%= text_input f, :customer, class: "input" %>
+            <%= error_tag f, :customer %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-3">
+        <div class="field">
+          <%= label f, :started_at , class: "label" %>
+          <div class="control">
+            <%= date_input f, :started_at, class: "input" %>
+            <%= error_tag f, :started_at %>
+          </div>
+        </div>
+      </div>
+      <div class="column is-3">
+        <div class="field">
+          <%= label f, :estimated_completion_at , class: "label" %>
+          <div class="control">
+            <%= date_input f, :estimated_completion_at, class: "input" %>
+            <%= error_tag f, :estimated_completion_at %>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="field">
+          <%= label f, :status , class: "label" %>
+          <div class="control">
+            <%= select f, :status, Ecto.Enum.values(Acture.Projects.Project, :status), prompt: "Choose a value", class: "input" %>
+            <%= error_tag f, :status %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <%= submit "Save", phx_disable_with: "Saving...", class: "button is-success" %>
+    </div>
+  </.form>
+</div>

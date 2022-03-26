@@ -80,6 +80,19 @@ defmodule ActureWeb.Router do
     get "/local_users/settings/confirm_email/:token", LocalUserSettingsController, :confirm_email
   end
 
+  live_session :private, on_mount: {ActureWeb.Live.InitAssings, :private} do
+    scope "/", ActureWeb do
+      pipe_through [:browser, :require_authenticated_local_user]
+
+      live "/projects", ProjectLive.Index, :index
+      live "/projects/new", ProjectLive.Index, :new
+      live "/projects/:id/edit", ProjectLive.Index, :edit
+
+      live "/projects/:id", ProjectLive.Show, :show
+      live "/projects/:id/show/edit", ProjectLive.Show, :edit
+    end
+  end
+
   scope "/", ActureWeb do
     pipe_through [:browser]
 

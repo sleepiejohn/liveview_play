@@ -1,27 +1,23 @@
 <main class="container">
   <%= if not is_nil(live_flash(@flash, :info)) do %>
-  <div class="message"
-    phx-click="lv:clear-flash"
-    phx-value-key="info">
-  <div class="message-body">
-    <i class="has-text-info" data-feather="info"></i>
+  <div class="message is-corner" phx-click="lv:clear-flash" phx-value-key="info">
+    <div class="message-body">
+      <i class="has-text-info" data-feather="info"></i>
     <span>
-      <%= live_flash(@flash, :info) %>
-    </span>
+        <%= live_flash(@flash, :info) %>
+      </span>
+    </div>
   </div>
-</div>
-<% end %>
-<%= if not is_nil(get_flash(@conn, :error)) do %>
-  <div class="message is-danger"
-    phx-click="lv:clear-flash"
-    phx-value-key="error">
-  <div class="message-body">
-    <i data-feather="x-circle"></i>
-    <span>
-      <%= get_flash(@conn, :error) %>
-    </span>
+  <% end %>
+  <%= if not is_nil(live_flash(@flash, :error)) do %>
+  <div class="message is-danger is-corner" phx-click="lv:clear-flash" phx-value-key="error">
+    <div class="message-body">
+      <i data-feather="x-circle"></i>
+      <span>
+        <%= get_flash(@conn, :error) %>
+      </span>
+    </div>
   </div>
-</div>
-<% end %>
+  <% end %>
   <%= @inner_content %>
 </main>

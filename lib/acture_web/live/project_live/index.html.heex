@@ -1,0 +1,87 @@
+<section class="section">
+  <div class="columns">
+    <div class="column">
+      <h1 class="title is-1">Projects</h1>
+    </div>
+  </div>
+  <!-- form component -->
+  <%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.project_index_path(@socket, :index)}>
+    <.live_component module={ActureWeb.ProjectLive.FormComponent} id={@project.id || :new} title={@page_title}
+      action={@live_action} project={@project} return_to={Routes.project_index_path(@socket, :index)} />
+  </.modal>
+  <% end %>
+
+  <div class="columns is-vcentered">
+    <div class="column">
+      <div class="field  is-grouped">
+        <label class="label is-hidden">Search</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Search" style="width: 15rem" />
+        </div>
+        <div class="control">
+          <button class="button is-link is-light">Go</button>
+        </div>
+        <div class="control">
+          <span><%= live_patch "New Project", to: Routes.project_index_path(@socket, :new), class: "button is-light " %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Project
+            <%= live_patch "▲", to: Routes.project_index_path(@socket, :index, %{"sort" => "title", "direction" => "asc"}) %>
+            <%= live_patch "▼", to: Routes.project_index_path(@socket, :index, %{"sort" => "title", "direction" => "desc"}) %>
+          </th>
+          <th>Customer
+            <%= live_patch "▲", to: Routes.project_index_path(@socket, :index, %{"sort" => "customer", "direction" => "asc"}) %>
+            <%= live_patch "▼", to: Routes.project_index_path(@socket, :index, %{"sort" => "customer", "direction" => "desc"}) %>
+          </th>
+          <th>Started At
+            <%= live_patch "▲", to: Routes.project_index_path(@socket, :index, %{"sort" => "started_at", "direction" => "asc"}) %>
+            <%= live_patch "▼", to: Routes.project_index_path(@socket, :index, %{"sort" => "started_at", "direction" => "desc"}) %>
+          </th>
+          <th>Estimated Completion
+            <%= live_patch "▲", to: Routes.project_index_path(@socket, :index, %{"sort" => "estimated_completion_at", "direction" => "asc"}) %>
+            <%= live_patch "▼", to: Routes.project_index_path(@socket, :index, %{"sort" => "estimated_completion_at", "direction" => "desc"}) %>
+          </th>
+          <th>Status
+            <%= live_patch "▲", to: Routes.project_index_path(@socket, :index, %{"sort" => "status", "direction" => "asc"}) %>
+            <%= live_patch "▼", to: Routes.project_index_path(@socket, :index, %{"sort" => "status", "direction" => "desc"}) %>
+          </th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="projects">
+        <%= for project <- @projects do %>
+        <tr id={"project-#{project.id}"} class="has-text-centered">
+          <td><%= project.title %></td>
+          <td><%= project.customer %></td>
+          <td><%= project.started_at %></td>
+          <td><%= project.estimated_completion_at %></td>
+          <td><%= project.status %></td>
+
+          <td>
+            <span><%= live_redirect "Open", to: Routes.project_show_path(@socket, :show, project) %></span>
+          </td>
+          <td>
+            <span><%= live_patch "Edit", to: Routes.project_index_path(@socket, :edit, project) %></span>
+          </td>
+          <td>
+            <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: project.id, data: [confirm: "Are you sure?"] %></span>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
+</section>

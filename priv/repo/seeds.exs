@@ -7,5 +7,8 @@
 #
 #     Acture.Repo.insert!(%Acture.SomeSchema{})
 #
-# We recommend using the bang functions (`insert!`, `update!`
+# We recommend u  sing the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+alias Acture.{Accounts, Repo}
+
+Accounts.register_local_user(%{email: "johndoe@example.com", password: "123123123123"})
